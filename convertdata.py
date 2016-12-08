@@ -22,18 +22,17 @@ def convert_text2bin(docs, writer):
     for i, fi in enumerate(docs):
         with open("stories/"+fi,'r') as f:
             wholetext=f.read().decode('utf8').lower()
-            wholetext=re.sub(r'(\"|\-\-|\,|\?)','',wholetext)
             wholetext=re.sub(r'[^\x00-\x7F]+','', wholetext)
             data=wholetext.split("@highlight")
             news=data[0]
-            highlights=". ".join([h.replace('\n\n','') for h in data[1:]])
-            news=" ".join(news.split('\n\n'))
+            highlights=(". ".join([h.replace('\n\n','') for h in data[1:]])+".").strip()
+            news=(" ".join(news.split('\n\n'))).strip()        
+            sentences = sent_tokenize(news)
+            news = '<d> <p> ' + ' '.join(['<s> ' + sentence + ' </s>' for sentence in sentences]) + ' </p> </d>'
+            sentences = sent_tokenize(highlights)
+            highlights = '<d> <p> ' + ' '.join(['<s> ' + sentence + ' </s>' for sentence in sentences]) + ' </p> </d>'
             words = (news+" "+highlights).split()
             counter.update(words)
-            sentences = sent_tokenize(news)
-            news = '<d><p>' + ' '.join(['<s>' + sentence + '</s>' for sentence in sentences]) + '</p></d>'
-            sentences = sent_tokenize(highlights)
-            highlights = '<d><p>' + ' '.join(['<s>' + sentence + '</s>' for sentence in sentences]) + '</p></d>'
             tf_example = example_pb2.Example()
             tf_example.features.feature['article'].bytes_list.value.extend([news.encode('utf-8')])
             tf_example.features.feature['abstract'].bytes_list.value.extend([highlights.encode('utf-8')])
