@@ -3,7 +3,7 @@ Generating Dataset for Google's Text Summarization Code by Xin Pan and Peter Liu
 
 Repository Link: https://github.com/tensorflow/models/tree/master/textsum
 
-Dataset can be obtained here: CNN stories http://cs.nyu.edu/~kcho/DMQA/
+Dataset can be obtained here: CNN and DailyMail stories http://cs.nyu.edu/~kcho/DMQA/
 
 
 Working:
@@ -14,16 +14,17 @@ Both articles and abstracts are tagged for sentence, paragraph and document star
 
 abstract is extracted using all @highlights in data.
 
-Vocabulary with 100000 words include UNK and PAD tokens are generated.
+Vocabulary with 200000 words include UNK and PAD tokens are generated.
+
+
 
 Usage:
 
-CNN Stories Dataset should be in %pwd%/stories
+CNN and DailyMail data should be present in %pwd%/cnn/stories and %pwd%/dailymail/stories
 
 run mkdir data in the present working directory
 
-run python convertdata.py
+You can opt for generating both Datasets or one of them using the following arguments-
 
-
-The script will also work for Dailymail stories.
+run python convertdata.py --both or --CNN or --DM
 
