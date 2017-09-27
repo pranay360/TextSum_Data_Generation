@@ -1,7 +1,7 @@
 # TextSummarization
 Generating Dataset for Google's Text Summarization Code by Xin Pan and Peter Liu 
 
-Repository Link: https://github.com/tensorflow/models/tree/master/textsum
+Repository Link: https://github.com/tensorflow/models/tree/master/research/textsum
 
 Dataset can be obtained here: CNN and DailyMail stories http://cs.nyu.edu/~kcho/DMQA/
 
